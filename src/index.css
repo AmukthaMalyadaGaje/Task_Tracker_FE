@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500 shadow-lg hover:shadow-xl;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 focus:ring-gray-500;
+  }
+
+  .btn-danger {
+    @apply bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+  }
+
+  .input {
+    @apply w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800
+    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200;
+  }
+
+  .input-error {
+    @apply border-red-500 focus:ring-red-500;
+  }
+
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 p-6;
+  }
+
+  .glass-card {
+    @apply bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 p-6;
+  }
+
+  .status-badge {
+    @apply px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  .status-pending {
+    @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200;
+  }
+
+  .status-in-progress {
+    @apply bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200;
+  }
+
+  .status-completed {
+    @apply bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200;
+  }
+
+  .progress-bar {
+    @apply h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden;
+  }
+
+  .progress-bar-fill {
+    @apply h-full bg-blue-600 transition-all duration-300 ease-out;
+  }
+
+  .sidebar {
+    @apply fixed top-0 left-0 h-full w-64 bg-white dark:bg-gray-800 shadow-lg transform transition-transform duration-300 ease-in-out;
+  }
+
+  .sidebar-collapsed {
+    @apply -translate-x-full;
+  }
+
+  .modal-backdrop {
+    @apply fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300;
+  }
+
+  .modal {
+    @apply fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+    bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-6 w-full max-w-md transition-all duration-300;
+  }
+
+  .toast {
+    @apply fixed bottom-4 right-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4
+    transform transition-all duration-300 ease-in-out;
+  }
+
+  .toast-success {
+    @apply border-l-4 border-green-500;
+  }
+
+  .toast-error {
+    @apply border-l-4 border-red-500;
+  }
+
+  .loading-spinner {
+    @apply animate-spin rounded-full h-6 w-6 border-2 border-gray-300 border-t-blue-600;
+  }
+
+  .page-enter {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .page-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 300ms, transform 300ms;
+  }
+
+  .page-exit {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .page-exit-active {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 300ms, transform 300ms;
+  }
+}
