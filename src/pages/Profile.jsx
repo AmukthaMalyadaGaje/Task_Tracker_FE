@@ -12,6 +12,7 @@ import {
   ActivityIcon,
   BookOpenIcon,
 } from 'lucide-react'; // Swap for Heroicons if you prefer
+import { API_ENDPOINTS } from '../config/api';
 
 const TABS = [
   { name: 'Overview', icon: BookOpenIcon },
@@ -28,16 +29,32 @@ export default function Profile() {
   const [editForm, setEditForm] = useState({});
   const [editLoading, setEditLoading] = useState(false);
   const [editError, setEditError] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://tasktrackerbe-production.up.railway.app/api/users/me', {
-      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-    })
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchUserData = async () => {
+      try {
+        const res = await fetch(API_ENDPOINTS.USERS.ME, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          },
+        });
+
+        if (!res.ok) {
+          throw new Error('Failed to fetch user data');
+        }
+
+        const data = await res.json();
         setUser(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchUserData();
   }, []);
 
   const openEdit = () => {
@@ -62,16 +79,22 @@ export default function Profile() {
     e.preventDefault();
     setEditLoading(true);
     setEditError(null);
+
     try {
-      const res = await fetch('http://localhost:5000/api/users/me', {
+      const res = await fetch(API_ENDPOINTS.USERS.ME, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
         body: JSON.stringify(editForm),
       });
-      if (!res.ok) throw new Error('Failed to update profile');
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || 'Failed to update profile');
+      }
+
       const updated = await res.json();
       setUser(updated);
       setEditOpen(false);
@@ -86,6 +109,22 @@ export default function Profile() {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-slate-100 to-slate-200">
         <span className="text-xl text-gray-500">Loading...</span>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-slate-100 to-slate-200">
+        <div className="text-center">
+          <span className="text-xl text-red-500 block mb-4">{error}</span>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+          >
+            Retry
+          </button>
+        </div>
       </div>
     );
   }
