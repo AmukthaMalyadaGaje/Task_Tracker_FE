@@ -21,13 +21,12 @@ function Login({ onLogin }) {
     setError('');
 
     try {
-      const response = await fetch('http://tasktrackerbe-production.up.railway.app/api/auth/login', {
+      const response = await fetch('https://tasktrackerbe-production.up.railway.app/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(formData),
-        credentials: 'include'
       });
 
       const data = await response.json();

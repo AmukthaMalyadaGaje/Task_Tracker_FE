@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://tasktrackerbe-production.up.railway.app/api';
+const API_BASE_URL = 'https://tasktrackerbe-production.up.railway.app/api';
 
 export const API_ENDPOINTS = {
     USERS: {

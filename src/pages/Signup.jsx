@@ -23,7 +23,7 @@ function Signup({ onLogin }) {
     setError('');
 
     try {
-      const response = await fetch('http://tasktrackerbe-production.up.railway.app/api/auth/signup', {
+      const response = await fetch('https://tasktrackerbe-production.up.railway.app/api/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

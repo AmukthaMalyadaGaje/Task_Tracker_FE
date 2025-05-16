@@ -25,7 +25,7 @@ const ProjectDetails = () => {
     try {
       setIsLoading(true);
       setError(null);
-      const response = await fetch(`http://tasktrackerbe-production.up.railway.app/api/projects/${projectId}`, {
+      const response = await fetch(`https://tasktrackerbe-production.up.railway.app/api/projects/${projectId}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },

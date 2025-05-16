@@ -30,7 +30,7 @@ const Dashboard = () => {
   const fetchProjects = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch('http://tasktrackerbe-production.up.railway.app/api/projects', {
+      const response = await fetch('https://tasktrackerbe-production.up.railway.app/api/projects', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
@@ -41,7 +41,7 @@ const Dashboard = () => {
     //   calculateStats(data);
     let tasksData = [];
     for (const project of data) {
-      const response = await fetch(`http://tasktrackerbe-production.up.railway.app/api/tasks/${project._id}`, {
+      const response = await fetch(`https://tasktrackerbe-production.up.railway.app/api/tasks/${project._id}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
@@ -109,7 +109,7 @@ tasksData.forEach((tasks)=>{
 
   const handleUpdateProject = async (projectId, data) => {
     try {
-      const response = await fetch(`http://tasktrackerbe-production.up.railway.app/api/projects/${projectId}/progress`, {
+      const response = await fetch(`https://tasktrackerbe-production.up.railway.app/api/projects/${projectId}/progress`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
